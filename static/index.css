@@ -1,0 +1,139 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 500px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Title */
+.title {
+    font-size: 26px;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+.prediction-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+label {
+    font-weight: bold;
+    text-align: left;
+}
+
+select, 
+.file-input {
+    width: 100%;
+    padding: 10px 1px;
+    margin-top: 5px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    
+}
+
+.file-label {
+    margin-top: 15px;
+    
+}
+
+/* Predict Button */
+.predict-button {
+    margin-top: 15px;
+    padding: 12px;
+    background: #28a745;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.predict-button:hover {
+    background: #218838;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+}
+.container {
+    animation: fadeInBlur 0.7s ease-in-out;
+}
+
+/* Fixed Buttons (Logout & History) */
+.top-left, .top-right {
+    position: fixed;
+    top: 20px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    z-index: 10; /* Ensure buttons are above the container */
+    animation: fadeInBlur 0.7s ease-in-out;
+    animation-delay: 0.5s; /* Container appears after buttons */
+    animation: none !important;
+}
+
+/* Logout Button - Top Left */
+.top-left {
+    left: 20px;
+    background: hsl(0, 0%, 0%, 40%);
+    color: white;
+    animation: none !important;
+}
+
+.top-left:hover {
+    background: hsl(211, 100%, 50%, 80%);
+    animation: none !important;
+}
+
+/* History Button - Top Right */
+.top-right {
+    right: 20px;
+    background: hsl(0, 0%, 0%, 40%);
+    color: white;
+    animation: none !important;
+}
+
+.top-right:hover {
+    background: hsl(211, 100%, 50%, 80%);
+    animation: none !important;
+}
+/* Fade-in Animation */
+@keyframes fadeInBlur {
+    from {
+        opacity: 0;
+        filter: blur(10px); /* Starts blurry */
+    }
+    to {
+        opacity: 1;
+        filter: blur(0); /* Ends sharp */
+    }
+}

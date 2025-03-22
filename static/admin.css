@@ -1,0 +1,225 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.top-left, .top-right {
+    position: fixed;
+    top: 20px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    z-index: 10; /* Ensure buttons are above the container */
+    animation: fadeInBlur 0.7s ease-in-out;
+    animation-delay: 0.5s; /* Container appears after buttons */
+    animation: none !important;
+}
+
+/* Logout Button - Top Left */
+.top-left {
+    left: 20px;
+    background: hsl(0, 0%, 0%, 40%);
+    color: white;
+    animation: none !important;
+}
+
+.top-left:hover {
+    background: hsl(211, 100%, 50%, 80%);
+    animation: none !important;
+}
+
+/* History Button - Top Right */
+.top-right {
+    right: 20px;
+    background: hsl(0, 0%, 0%, 40%);
+    color: white;
+    animation: none !important;
+}
+
+.top-right:hover {
+    background: hsl(211, 100%, 50%, 80%);
+    animation: none !important;
+}
+
+
+
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: rgb(0, 0, 0);
+}
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: rgb(255, 255, 255);
+}
+
+.action-buttons {
+    margin-top: 20px;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    color: white;
+    background: #007bff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.button:hover {
+    background: #0056b3;
+}
+/* History Table */
+/* Table Container */
+.admin-container {
+    background-color: hsla(0, 0%, 100%, 0.57);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1200px;
+    padding: 30px;
+    text-align: center;
+    zoom: 90%;
+}
+
+.Admin_user_container{
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 20px;
+    background: white;
+    
+}
+
+.user_container{
+    max-height: 400px; /* Limit height to approximately 10 rows */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid #ddd; /* Optional: Add a border for better visibility */
+    border-radius: 8px; /* Rounded corners */
+    margin-top: 20px;
+    background: white; /* Background color for the table */
+}
+.user-table,.history-table {
+    background-color: hsla(0, 0%, 100%, 0.5);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1200px;
+    padding: 30px;
+    text-align: center;
+    /* overflow: hidden; */
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    text-align: left;
+    max-height: 400px; /* Limit height to approximately 10 rows */
+    border: 1px solid #ddd; /* Optional: Add a border for better visibility */
+
+}
+
+.user-table th,.history-table th,
+.user-table td,.history-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    color: #333333;
+}
+
+.user-table th,.history-table th {
+    background-color: #f4f4f4; 
+    font-weight: bold;
+    color: #333333;
+}
+
+.user-table tr,.history-table tr {
+    background-color: hsl(0, 0%, 98%, 90%);
+}
+
+
+.delete-button {
+
+    padding: 10px 20px;
+
+    font-size: 15px;
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    background: #d24747;
+}
+
+.delete-button:hover{
+    
+
+    background: #b03636;
+
+}
+
+.clear-button {
+    background: #28a745;
+}
+
+.button_clear_button{
+display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    color: white;
+    background: #d24747;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 1cm;
+}
+
+.button_clear_button:hover{
+    
+
+    background: #b03636;
+
+}
+/* Fade-in Animation */
+@keyframes fadeInBlur {
+    from {
+        opacity: 0;
+        filter: blur(10px); /* Starts blurry */
+    }
+    to {
+        opacity: 1;
+        filter: blur(0); /* Ends sharp */
+    }
+}
+
+.admin-dashboard {
+    background-color: hsla(0, 0%, 0%, 0.455);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1200px;
+    padding: 30px;
+    text-align: center;
+    overflow: hidden;
+}
+.admin-dashboard,.admin-container {
+    animation: fadeInBlur 0.7s ease-in-out;
+}

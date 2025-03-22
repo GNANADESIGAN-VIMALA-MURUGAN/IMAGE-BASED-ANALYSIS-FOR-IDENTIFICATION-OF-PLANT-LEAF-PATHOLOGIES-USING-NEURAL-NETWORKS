@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="icon"  href= "{{ url_for('static', filename='clover.png') }}">
+</head>
+<body style="height: 100vh; margin: 0; padding: 0; background: url('{{ url_for('static', filename='procees.jpg') }}') no-repeat center center fixed; background-size: cover; font-family:'Poppins', sans-serif; color: white; text-align: center; display:flex; justify-content:center; align-items:center;">
+    <div class="admin-container">
+        <h1>Admin List</h1>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flash-messages" style="list-style: none;padding: 10px;background: #28a745;color: white;border-radius: 6px;margin-bottom: 15px;">
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Admin Management Table -->
+        <div class="Admin_user_container">
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for admin in admins %}
+                    <tr>
+                        <td>{{ admin[0] }}</td>
+                        <td>{{ admin[1] }}</td>
+                        <td>{{ admin[2] }}</td>
+                        <td>
+                            <form action="/admin/delete/{{ admin[0] }}" method="POST" style="display:inline;">
+                                <button type="submit" class="delete-button">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <form action="/admin/clear" method="POST" style="display:inline;">
+            <button type="submit" class="button_clear_button">Clear All</button>
+        </form>
+        
+    </div>
+    <div class="action-buttons">
+        <a style="text-decoration: none;" href="/admin/dashboard" class="top-left">⬅️ Go Back</a>
+        <a href="/admin/signup" class="top-right">🕵🏻 Add Admin</a>
+    </div>
+
+</body>
+</html>

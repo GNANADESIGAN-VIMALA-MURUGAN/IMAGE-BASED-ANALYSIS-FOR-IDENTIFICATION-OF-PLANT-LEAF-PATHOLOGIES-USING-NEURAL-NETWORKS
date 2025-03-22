@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="icon"  href= "static/clover.png">
+
+</head>
+<body style="height: 100vh; margin: 0; padding: 0; background: url('static/procees.jpg') no-repeat center center fixed; background-size: cover; font-family: 'Poppins', sans-serif; color: white; text-align: center; display: flex; justify-content: center; align-items: center;">
+
+    <div class="container">
+        <h1 class="title">🌿 Plant Disease Prediction 🌿</h1>
+        <form action="/predict" method="POST" enctype="multipart/form-data" class="prediction-form">
+            <!-- Dropdown for Leaf Type -->
+            <label for="leaf_type">Select Leaf Type:</label>
+            <select id="leaf_type" name="leaf_type" required>
+                <option value="potato">Potato</option>
+                <option value="tomato">Tomato</option>
+                <option value="grape">Grape</option>
+            </select>
+
+            <!-- Dropdown for Model Type -->
+            <label for="model_type">Select Model Type:</label>
+            <select id="model_type" name="model_type" required>
+                <option value="cnn">CNN (Best Model)</option>
+                <option value="RNN_GRU">RNN</option>
+                <option value="ANN_MLP">ANN</option>
+                <option value="all">All Models</option>
+            </select>
+
+            <!-- File Upload -->
+            <label for="file" class="file-label">Upload an Image:</label>
+            <input type="file" id="file" name="file" accept="image/*" required class="file-input">
+
+            <button type="submit" class="predict-button">🔍 Predict</button>
+        </form>
+
+        
+    </div>
+    <div class="action-buttons">
+        <a href="/logout" class="top-left">🚪 Log Out</a>
+        <a href="/history" class="top-right">📜 View History</a>
+    </div>
+</body>
+</html>

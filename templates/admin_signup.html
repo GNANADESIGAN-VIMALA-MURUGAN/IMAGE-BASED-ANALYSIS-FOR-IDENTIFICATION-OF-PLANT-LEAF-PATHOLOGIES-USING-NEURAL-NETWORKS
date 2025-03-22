@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="icon"  href= "{{ url_for('static', filename='clover.png') }}">
+</head>
+<body style="height: 100vh; margin: 0; padding: 0; 
+             background: url('{{ url_for('static', filename='home.jpg') }}') no-repeat center center fixed, #6a11cb; 
+             background-size: cover; font-family: 'Poppins', sans-serif; color: white; text-align: center; 
+             display: flex; justify-content: center; align-items: center;">  <div class="signup-container">
+        <h1 class="title">📝 Add Admin </h1>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flash-messages">
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('admin_signup') }}" class="signup-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Choose a username" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Create a password" required>
+
+            <button type="submit" class="signup-button">🚀 Sign Up</button>
+        </form>
+
+        <p class="login-text">Already have an account? <a href="{{ url_for('admin_login') }}" class="login-link">Log In</a></p>
+    </div>
+    <div class="action-buttons">
+        <a href="/admin/admins" class="top-left">🚪 Back</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon"  href= "{{ url_for('static', filename='clover.png') }}">
+</head>
+<body style="height: 100vh; margin: 0; padding: 0; background: url('/static/procees.jpg') no-repeat center center fixed; background-size: cover;">
+    <div class="container">
+        <header class="header">
+            <h1>🌿 Leaf Disease Prediction Results</h1>
+        </header>
+
+        {% if error %}
+            <div class="error-box">
+                <p><strong>⚠️ Error:</strong> {{ error }}</p>
+            </div>
+        {% else %}
+            <!-- Display the Uploaded Image -->
+            <div class="image-container">
+                <img src="data:image/jpeg;base64,{{ image_data }}" alt="Uploaded Image" class="uploaded-image">
+            </div>
+            <!-- Display Predictions for All Models -->
+            {% if cnn_result and RNN_GRU_result and ANN_MLP_result %}
+                <div class="results-container">
+                    <h2 class="all-model-text">🌟 Model Predictions</h2>
+                    <div class="results-grid">
+                        <!-- CNN Model Card -->
+                        <div class="model-card cnn">
+                            <h2>CNN Model</h2>
+                            <p><strong>🌱 Plant:</strong> <span class="plant-name">{{ cnn_result.leaf_type | default("Unknown Plant") }}</span></p>
+                            <p><strong>🔍 Predicted Class:</strong> <span class="predicted-class">{{ cnn_result.predicted_class | default("Unknown Class") }}</span></p>
+                            <p><strong>🎯 Confidence:</strong> <span class="confidence">{{ cnn_result.confidence | default("N/A") }}</span></p>
+                            <p><strong>⏳ Prediction Time:</strong> <span class="prediction-time">{{ cnn_result.prediction_time | default("N/A") }}</span></p>
+                            <div class="disease-description">
+                                <h3>Disease Information</h3>
+                                <p>{{ disease_descriptions[cnn_result.leaf_type | default("tomato")][cnn_result.predicted_class | default("Healthy")] | default("No description available.") }}</p>
+                            </div>
+                        </div>
+
+                        <!-- RNN_GRU Model Card -->
+                        <div class="model-card RNN_GRU">
+                            <h2>RNN_GRU Model</h2>
+                            <p><strong>🌱 Plant:</strong> <span class="plant-name">{{ RNN_GRU_result.leaf_type | default("Unknown Plant") }}</span></p>
+                            <p><strong>🔍 Predicted Class:</strong> <span class="predicted-class">{{ RNN_GRU_result.predicted_class | default("Unknown Class") }}</span></p>
+                            <p><strong>🎯 Confidence:</strong> <span class="confidence">{{ RNN_GRU_result.confidence | default("N/A") }}</span></p>
+                            <p><strong>⏳ Prediction Time:</strong> <span class="prediction-time">{{ RNN_GRU_result.prediction_time | default("N/A") }}</span></p>
+                            <div class="disease-description">
+                                <h3>Disease Information</h3>
+                                <p>{{ disease_descriptions[RNN_GRU_result.leaf_type | default("tomato")][RNN_GRU_result.predicted_class | default("Healthy")] | default("No description available.") }}</p>
+                            </div>
+                        </div>
+
+                        <!-- ANN_MLP Model Card -->
+                        <div class="model-card ANN_MLP">
+                            <h2>ANN_MLP Model</h2>
+                            <p><strong>🌱 Plant:</strong> <span class="plant-name">{{ ANN_MLP_result.leaf_type | default("Unknown Plant") }}</span></p>
+                            <p><strong>🔍 Predicted Class:</strong> <span class="predicted-class">{{ ANN_MLP_result.predicted_class | default("Unknown Class") }}</span></p>
+                            <p><strong>🎯 Confidence:</strong> <span class="confidence">{{ ANN_MLP_result.confidence | default("N/A") }}</span></p>
+                            <p><strong>⏳ Prediction Time:</strong> <span class="prediction-time">{{ ANN_MLP_result.prediction_time | default("N/A") }}</span></p>
+                            <div class="disease-description">
+                                <h3>Disease Information</h3>
+                                <p>{{ disease_descriptions[ANN_MLP_result.leaf_type | default("tomato")][ANN_MLP_result.predicted_class | default("Healthy")] | default("No description available.") }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graph Comparison -->
+                <div class="graph-container">
+                    <h2>📊 Model Comparison</h2>
+                    <canvas id="comparisonChart" width="600" height="300"></canvas>
+                    <script>
+                        const ctx = document.getElementById('comparisonChart').getContext('2d');
+                        const comparisonChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['CNN', 'RNN_GRU', 'ANN_MLP'],
+                                datasets: [
+                                    {
+                                        label: 'Confidence (%)',
+                                        data: [
+                                            parseFloat('{{ cnn_result.confidence | default("0") }}'.replace('%', '')),
+                                            parseFloat('{{ RNN_GRU_result.confidence | default("0") }}'.replace('%', '')),
+                                            parseFloat('{{ ANN_MLP_result.confidence | default("0") }}'.replace('%', ''))
+                                        ],
+                                        backgroundColor: ['#007bff', '#ff5733', '#28a745'],
+                                        borderColor: ['#0056b3', '#c70039', '#1c7c31'],
+                                        borderWidth: 1
+                                    },
+                                    {
+                                        label: 'Prediction Time (seconds)',
+                                        data: [
+                                            parseFloat('{{ cnn_result.prediction_time | default("0") }}'.replace(' seconds', '')),
+                                            parseFloat('{{ RNN_GRU_result.prediction_time | default("0") }}'.replace(' seconds', '')),
+                                            parseFloat('{{ ANN_MLP_result.prediction_time | default("0") }}'.replace(' seconds', ''))
+                                        ],
+                                        backgroundColor: 'rgba(255, 206, 86, 0.6)',
+                                        borderColor: 'rgba(255, 159, 64, 1)',
+                                        borderWidth: 1
+                                    }
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        max: 100
+                                    }
+                                },
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: 'Confidence and Prediction Time Comparison'
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                let label = context.dataset.label || '';
+                                                if (label) {
+                                                    label += ': ';
+                                                }
+                                                label += context.raw.toFixed(2);
+                                                return label;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            {% else %}
+                <!-- Display Single Model Result -->
+                <div class="single-result">
+                    <div class="model-card cnn">
+                        <h2>{{ model_type | default("Model") }} Model</h2>
+                        <div class="result-info">
+                            <p><strong>🌱 Plant:</strong> <span class="plant-name">{{ plant_name | default("Unknown Plant") }}</span></p>
+                            <p><strong>🔍 Predicted Class:</strong> <span class="predicted-class">{{ predicted_label | default("Unknown Class") }}</span></p>
+                            <p><strong>🎯 Confidence:</strong> <span class="confidence">{{ confidence | default("N/A") }}</span></p>
+                            <p><strong>⏳ Prediction Time:</strong> <span class="prediction-time">{{ prediction_time | default("N/A") }}</span></p>
+                            <div class="disease-description">
+                                <h3>Disease Information</h3>
+                                <p>{{ disease_descriptions[plant_name | default("tomato")][predicted_label | default("Healthy")] | default("No description available.") }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="action-buttons">
+        <a href="/admin/history" class="top-left">⬅️ Go Back</a>
+
+        
+    </div>
+</body>
+</html>

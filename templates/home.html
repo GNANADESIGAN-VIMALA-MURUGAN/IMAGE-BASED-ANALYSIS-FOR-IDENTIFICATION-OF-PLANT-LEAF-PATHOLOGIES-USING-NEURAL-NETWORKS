@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon"  href= "static/clover.png">
+    <title>Home | Plant Disease Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    
+</head>
+<body style="height: 100vh; margin: 0; padding: 0; background: url('static/Welcome.jpg') no-repeat center center fixed; background-size: cover; font-family: 'Poppins', sans-serif; color: white; text-align: center; display: flex; justify-content: center; align-items: center;">
+    <div class="container">
+        <h1>🌿 Welcome to Plant Disease Prediction 🌱</h1>
+        <a href="{{ url_for('signup') }}" class="button">Sign Up</a>
+        <a href="{{ url_for('login') }}" class="button">Log In</a>
+        <a href="{{ url_for('admin_login') }}" class="button">Admin</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+/* Container */
+.container {
+    margin: auto;
+    width: 90%;
+    max-width: auto;
+   
+    padding: 30px 50px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+/* Header */
+.header h1 {
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgb(0, 0, 0);
+}
+.all-model-text{
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgb(0, 0, 0);
+}
+/* Image Display */
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    z-index: 2;
+}
+.uploaded-image {
+    max-width: 50%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+}
+/* Results Grid - All Models in One Row */
+.results-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: nowrap; /* Ensures all models stay in the same row */
+}
+/* Model Cards */
+.model-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 30%; /* Equal width for all models */
+    transition: 0.3s;
+}
+.model-card:hover {
+    transform: translateY(-5px);
+}
+/* Model Colors */
+.cnn { border-top: 5px solid #007bff; }
+.RNN_GRU { border-top: 5px solid #ff5733; }
+.ANN_MLP { border-top: 5px solid #28a745; }
+
+/* Graph Container */
+.graph-container {
+    background: rgba(255, 255, 255, 1);
+    margin-top: 30px;
+    padding: 3%;
+    border-radius: 12px;
+    border-top: 5px solid #ff5733; 
+}
+/* Action Buttons */
+.action-buttons {
+    margin-top: 20px;
+}
+/* Fixed Buttons */
+.top-left, .top-right {
+    position: absolute;
+    top: 20px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+    animation: none !important;
+}
+/* Logout Button - Top Left */
+.top-left {
+    left: 20px;
+    background: hsl(0, 0%, 0%, 40%);
+    color: white;
+    animation: none !important;
+}
+.top-left:hover {
+    background: hsl(211, 100%, 50%, 80%);
+    animation: none !important;
+}
+/* History Button - Top Right */
+.top-right {
+    right: 20px;
+    background: hsl(0, 0%, 0%, 40%);
+    color: white;
+    animation: none !important;
+}
+.top-right:hover {
+    background: hsl(211, 100%, 50%, 80%);
+    animation: none !important;
+}
+.single-result {
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    position: absolute; /* Position it absolutely within its parent */
+    top: 73%; /* Move it to the vertical center */
+    left: 50%; /* Move it to the horizontal center */
+    transform: translate(-50%, -50%); /* Adjust for exact centering */
+    width: 100%; /* Ensure it spans the full width of its container */
+    text-align: center; /* Ensure text inside is centered */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1100px) {
+    .results-grid {
+        flex-wrap: wrap; /* Allows wrapping on smaller screens */
+        justify-content: center;
+    }
+    .model-card {
+        width: 45%; /* Two cards per row on medium screens */
+    }
+}
+@media (max-width: 768px) {
+    .uploaded-image {
+        max-width: 80%;
+    }
+    .results-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    .model-card {
+        width: 90%; /* One card per row on small screens */
+    }
+}
+.login-container {
+    animation: fadeInBlur 0.7s ease-in-out;
+}
+
+
+/* Fade-in Animation */
+@keyframes fadeInBlur {
+    from {
+        opacity: 0;
+        filter: blur(10px); /* Starts blurry */
+    }
+    to {
+        opacity: 1;
+        filter: blur(0); /* Ends sharp */
+    }
+}

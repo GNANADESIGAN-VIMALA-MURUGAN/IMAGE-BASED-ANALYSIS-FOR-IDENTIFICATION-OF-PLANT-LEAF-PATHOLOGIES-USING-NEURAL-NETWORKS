@@ -1,0 +1,47 @@
+/* Button Styles */
+.top-left, .top-right {
+    position: fixed;
+    top: 20px;
+    z-index: 10; /* Ensure buttons are above the container */
+    opacity: 0; /* Start invisible */
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.top-left {
+    left: 20px;
+    animation-delay: 0.2s; /* Buttons appear first */
+}
+
+.top-right {
+    right: 20px;
+    animation-delay: 0.2s; /* Buttons appear first */
+}
+
+/* Container Styles */
+.container {
+    position: relative;
+    z-index: 1; /* Keep the container below the buttons */
+    animation: fadeInBlur 0.7s ease-in-out;
+    animation-delay: 0.5s; /* Container appears after buttons */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInBlur {
+    from {
+        opacity: 0;
+        filter: blur(10px);
+    }
+    to {
+        opacity: 1;
+        filter: blur(0);
+    }
+}

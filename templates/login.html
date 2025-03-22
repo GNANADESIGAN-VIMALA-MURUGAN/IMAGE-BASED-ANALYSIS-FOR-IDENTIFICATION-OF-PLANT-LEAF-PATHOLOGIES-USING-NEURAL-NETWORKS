@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="icon"  href= "static/clover.png">
+</head>
+<body style="height: 100vh; margin: 0; padding: 0; background: url('static/home.jpg') no-repeat center center fixed; background-size: cover; font-family: 'Poppins', sans-serif; color: white; text-align: center; display: flex; justify-content: center; align-items: center;">
+
+    <div class="login-container">
+        
+        <h1 class="title">🔐 Log In</h1>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flash-messages">
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('login') }}" class="login-form">
+            <label for="identifier">Username or Email:</label>
+            <input type="text" id="identifier" name="identifier" placeholder="Enter your username or email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <button type="submit" class="login-button">🚀 Log In</button>
+        </form>
+
+        <p class="signup-text">Don't have an account? <a href="{{ url_for('signup') }}" class="signup-link">Sign Up</a></p>
+    </div>
+    <div class="action-buttons">
+        <a href="/" class="top-left">🚪 Back</a>
+    </div>
+</body>
+</html>

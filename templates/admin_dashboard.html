@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="icon"  href= "{{ url_for('static', filename='clover.png') }}">
+</head>
+<body style="height: 100vh; margin: 0; padding: 0; background: url('{{ url_for('static', filename='procees.jpg') }}') no-repeat center center fixed; background-size: cover; font-family: 'Poppins', sans-serif; color: white; text-align: center; display: flex; justify-content: center; align-items: center;">
+
+    <div class="admin-dashboard">
+        <h2>Admin Dashboard</h2>
+
+        <!-- Navigation Buttons -->
+        <div class="action-buttons">
+            <a style="text-decoration: none;" href="/admin/users" class="button">View User Data</a>
+            <a style="text-decoration: none;" href="/admin/history" class="button">View Prediction History</a>
+            <a style="text-decoration: none;" href="/admin/admins" class="button">View Admin Data</a>
+        </div>
+    </div>
+    <div class="action-buttons">
+        <a href="/admin/login" class="top-left">🚪 Log Out</a>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='history.css') }}">
+    <link rel="icon"  href= "static/clover.png">
+</head>
+<body style="height: 100vh; margin: 0; padding: 0; background: url('static/procees.jpg') no-repeat center center fixed; background-size: cover;">
+    <div class="container">
+        <header class="header">
+            <h1>Prediction History</h1>
+        </header>
+        {% if error %}
+            <div class="error-box">
+                <p><strong>Error:</strong> {{ error }}</p>
+            </div>
+        {% else %}
+            {% if predictions %}
+                <div class="table-container"> <!-- Add a container for the table -->
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>S.No.</th> <!-- Serial number -->
+                                <th>Plant Type</th>
+                                <th>Model Type</th>
+                                <th>Predicted Class</th>
+                                <th>Confidence</th>
+                                <th>Prediction Time</th>
+                                <th>Time of Prediction</th> <!-- New column for created_at -->
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for prediction in predictions %}
+                                <tr>
+                                    <td>{{ loop.index }}</td> <!-- Serial number using loop.index -->
+                                    <td>{{ prediction.leaf_type }}</td>
+                                    <td>{{ prediction.model_type }}</td>
+                                    <td>{{ prediction.predicted_class }}</td>
+                                    <td>{{ prediction.confidence }}</td>
+                                    <td>{{ prediction.prediction_time }}</td>
+                                    <td>{{ prediction.created_at }}</td> <!-- Display the time of prediction -->
+                                    <td>
+                                        <a href="/history/{{ prediction.id }}" class="button small-button">View</a>
+                                        <form action="/delete/{{ prediction.id }}" method="POST" style="display:inline;">
+                                           
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p>No predictions found.</p>
+            {% endif %}
+        {% endif %}
+        <div class="action-buttons">
+            
+            <form action="/clear" method="POST" style="display:inline;">
+            
+            </form>
+        </div>
+    </div>
+    <div><a href="/index" class="top-left">⬅️ Go Back</a></div>
+</body>
+</html>
